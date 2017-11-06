@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='UTF-8'>
+			<title>RandD Spending by GSP</title>
+			<script type="text/javascript" src="jquery-3.2.1.min.js"></script> 
+			<script type="text/javascript" src="jquery.tablesorter.js"></script> 
+			<style type="text/css">
+			table {
+			    border-collapse: collapse;
+			}
+
+			table {
+			    border: 0px solid black;
+			}
+			body {
+			  /* font-family: "Helvetica Neue"; */
+			  font-family: 'Univers LT Pro', sans-serif;
+			  font-size: 14px;
+			  text-rendering: optimizeLegibility;
+			}
+
+			th.headerSortUp { 
+			    background-image: url(metro_black-asc.png); 
+			    background-color: black; 
+			} 
+			th.headerSortDown { 
+			    background-image: url(metro_black-desc.png); 
+			    background-color: black; 
+			} 
+
+</style>
+		</head>
+		<body>
+			<h1> Ranking of Percent of Business R&D Spending by Gross State Product</h1>
+			<h6> The columns can be in ascending or descending order by clicking on the headers. Dollars in AUD. </h6>
+			<table <table id="myTable" class="tablesorter" cellspacing="4">
+				<thead>
+					<tr>
+						<th> Row Number</th>
+						<th>State or Territory</th>
+						<th>Gross State Product ($ m.)</th>
+						<th>Business spending on R&D ($ m.)</th>
+						<th> Percent of R&D spending by GSP</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td> 1. </td>
+						<td> Massachusetts</td>
+						<td>624,384</td>
+						<td>27,482</td>
+						<td>4.4</td>
+					</tr>
+					<tr>
+						<td>2.</td>
+						<td> California</td>
+						<td>3,187,314</td>
+						<td>138,132</td>
+						<td>4.33</td>
+					</tr>
+					<tr>
+						<td>3.</td>
+						<td> Delaware</td>
+						<td>88,092</td>
+						<td>3,430</td>
+						<td>3.89</td>
+					</tr>
+					<tr>
+						<td>4. </td>
+						<td>Washington</td>
+						<td>571,063</td>
+						<td>21,670</td>
+						<td>3.79</td>
+					</tr>
+					<tr>
+						<td>5. </td>
+						<td>Michigan</td>
+						<td>470,611</td>
+						<td>17,136</td>
+						<td>3.64</td>
+					</tr>
+					<tr>
+						<td>6. </td>
+						<td>Connecticut</td>
+						<td>327,870</td>
+						<td>10,915</td>
+						<td>3.33</td>
+					</tr>
+					<tr>
+						<td>7. </td>
+						<td>Oregon</td>
+						<td>276,978</td>
+						<td>8,132</td>
+						<td>2.94</td>
+					</tr>
+					<tr>
+						<td>8. </td>
+						<td>New Hampshire</td>
+						<td>95,005</td>
+						<td>2,471</td>
+						<td>2.6</td>
+					</tr>
+					<tr>
+						<td>9. </td>
+						<td>New Jersey</td>
+						<td>721,937</td>
+						<td>18,054</td>
+						<td>2.5</td>
+					</tr>
+					<tr>
+						<td>10. </td>
+						<td>Idaho</td>
+						<td>83,737</td>
+						<td>1,988</td>
+						<td>2.37</td>
+					</tr>
+					<tr>
+						<td>11. </td>
+						<td>Utah</td>
+						<td>190,730</td>
+						<td>4,188</td>
+						<td>2.2</td>
+					</tr>
+					<tr>
+						<td>12. </td>
+						<td>Minnesota</td>
+						<td>418,089</td>
+						<td>8,724</td>
+						<td>2.09</td>
+					</tr>
+					<tr>
+						<td>13. </td>
+						<td>Missouri</td>
+						<td>374,449</td>
+						<td>7,775</td>
+						<td>2.08</td>
+					</tr>
+					<tr>
+						<td>14. </td>
+						<td>Arizona</td>
+						<td>372,824</td>
+						<td>7,055</td>
+						<td>1.89</td>
+					</tr>
+					<tr>
+						<td>15. </td>
+						<td>Indiana</td>
+						<td>426,443</td>
+						<td>7,998</td>
+						<td>1.88</td>
+					</tr>
+					<tr>
+						<td>16. </td>
+						<td>North Carolina</td>
+						<td>639,275</td>
+						<td>10,965</td>
+						<td>1.72</td>
+					</tr>
+					<tr>
+						<td>17. </td>
+						<td>Illinois</td>
+						<td>987,786</td>
+						<td>16,258</td>
+						<td>1.65</td>
+					</tr>
+					<tr>
+						<td>18. </td>
+						<td>Wisconsin</td>
+						<td>385,794</td>
+						<td>5,981</td>
+						<td>1.55</td>
+					</tr>
+					<tr>
+						<td>19. </td>
+						<td>Ohio</td>
+						<td>776,900</td>
+						<td>11,569</td>
+						<td>1.49</td>
+					</tr>
+					<tr>
+						<td>20. </td>
+						<td>Pennsylvania</td>
+						<td>906,197</td>
+						<td>13245</td>
+						<td>1.46</td>
+					</tr>
+					<tr>
+						<td>21. </td>
+						<td>Iowa</td>
+						<td>224,897</td>
+						<td>3,248</td>
+						<td>1.44</td>
+					</tr>
+					<tr>
+						<td>22. </td>
+						<td>Maryland</td>
+						<td>468,502</td>
+						<td>6570</td>
+						<td>1.4</td>
+					</tr>
+					<tr>
+						<td>23. </td>
+						<td>Kansas</td>
+						<td>194,242.</td>
+						<td>2720</td>
+						<td>1.4</td>
+					</tr>
+					<tr>
+						<td>24. </td>
+						<td>Colorado</td>
+						<td>400815</td>
+						<td>5580</td>
+						<td>1.39</td>
+					</tr>
+					<tr>
+						<td>25. </td>
+						<td>Rhode Island</td>
+						<td>71,188</td>
+						<td>961</td>
+						<td>1.35</td>
+					</tr>
+					<tr style="background-color:rgb(237,27,53)">
+						<td>26. </td>
+						<td>New South Wales</td>
+						<td>513,529</td>
+						<td>6,421</td>
+						<td>1.25</td>
+					</tr>
+					<tr style="background-color:rgb(237,27,53)">
+						<td>27. </td>
+						<td>Victoria</td>
+						<td>361,669</td>
+						<td>4,275</td>
+						<td>1.18</td>
+					</tr>
+					<tr>
+						<td>28. </td>
+						<td>Texas</td>
+						<td>2,061,056</td>
+						<td>22,194</td>
+						<td>1.08</td>
+					</tr>
+					<tr>
+						<td>29. </td>
+						<td>New York</td>
+						<td>1,849,246</td>
+						<td>19,609</td>
+						<td>1.06</td>
+					</tr>
+					<tr>
+						<td>30. </td>
+						<td>Virginia</td>
+						<td>616,224</td>
+						<td>5,739</td>
+						<td>0.93</td>
+					</tr>
+					<tr>
+						<td>31. </td>
+						<td>Georgia</td>
+						<td>641,554</td>
+						<td>5,902</td>
+						<td>0.92</td>
+					</tr>
+					<tr style="background-color:rgb(237,27,53)">
+						<td>32. </td>
+						<td>Western Australia</td>
+						<td>250,377</td>
+						<td>2,082</td>
+						<td>0.83</td>
+					</tr>
+					<tr>
+						<td>33. </td>
+						<td>Vermont</td>
+						<td>38,760</td>
+						<td>316</td>
+						<td>0.82</td>
+					</tr>
+					<tr>
+						<td>34. </td>
+						<td>Alabama</td>
+						<td>255,817</td>
+						<td>1,997</td>
+						<td>0.78</td>
+					</tr>
+					<tr style="background-color:rgb(237,27,53)">
+						<td>35. </td>
+						<td>South Australia</td>
+						<td>99,237</td>
+						<td>774</td>
+						<td>0.78</td>
+					</tr>
+					<tr style="background-color:rgb(237,27,53)">
+						<td>36. </td>
+						<td>Tasmania</td>
+						<td>25,695</td>
+						<td>184</td>
+						<td>0.72</td>
+					</tr>
+					<tr>
+						<td>37. </td>
+						<td>Kentucky</td>
+						<td>245,477</td>
+						<td>1,653</td>
+						<td>0.67</td>
+					</tr>
+					<tr>
+						<td>38. </td>
+						<td>Florida</td>
+						<td>1,130,647</td>
+						<td>7440</td>
+						<td>0.66</td>
+					</tr>
+					<tr>
+						<td>39. </td>
+						<td>South Carolina</td>
+						<td>258,185</td>
+						<td>1649</td>
+						<td>0.64</td>
+					</tr>
+					<tr style="background-color:rgb(237,27,53)">
+						<td>40. </td>
+						<td>Queensland</td>
+						<td>308,448</td>
+						<td>1,956</td>
+						<td>0.63</td>
+					</tr>
+					<tr>
+						<td>41. </td>
+						<td>New Mexico</td>
+						<td>119,261</td>
+						<td>642</td>
+						<td>0.54</td>
+					</tr>
+					<tr>
+						<td>42. </td>
+						<td>Maine</td>
+						<td>73340</td>
+						<td>381</td>
+						<td>0.52</td>
+					</tr>
+					<tr>
+						<td>43. </td>
+						<td>Nebraska</td>
+						<td>145,137</td>
+						<td>739</td>
+						<td>0.51</td>
+					</tr>
+					<tr>
+						<td>44. </td>
+						<td>Montana</td>
+						<td>58,645</td>
+						<td>289</td>
+						<td>0.49</td>
+					</tr>
+					<tr>
+						<td>45. </td>
+						<td>Wyoming</td>
+						<td>50,420</td>
+						<td>226</td>
+						<td>0.45</td>
+					</tr>
+					<tr>
+						<td>46. </td>
+						<td>North Dakota</td>
+						<td>71,542</td>
+						<td>270</td>
+						<td>0.38</td>
+					</tr>
+					<tr>
+						<td>47. </td>	
+						<td>Oklahoma</td>
+						<td>240,506</td>
+						<td>846</td>
+						<td>0.35</td>
+					</tr>
+					<tr style="background-color:rgb(237,27,53)">
+						<td>48. </td>
+						<td>Northern Territory</td>
+						<td>23,032</td>
+						<td>72</td>
+						<td>0.31</td>
+					</tr>
+					<tr>
+						<td>49. </td>
+						<td>South Dakota</td>
+						<td>60,216</td>
+						<td>178</td>
+						<td>0.3</td>
+					</tr>
+					<tr>
+						<td>50. </td>
+						<td>West Virginia</td>
+						<td>93,874</td>
+						<td>257</td>
+						<td>0.27</td>
+					</tr>
+					<tr>
+						<td>51. </td>
+						<td>Nevada</td>
+						<td>180,459</td>
+						<td>487</td>
+						<td>0.27</td>
+					</tr>
+					<tr style="background-color:rgb(237,27,53)">
+						<td>52. </td>
+						<td>Australian Capital Territory</td>
+						<td>35,029</td>
+						<td>90</td>
+						<td>0.26</td>
+					</tr>
+					<tr>
+						<td>53. </td>
+						<td>Arkansas</td>
+						<td>151,813</td>
+						<td>386</td>
+						<td>0.25</td>
+					</tr>
+					<tr>
+						<td>54. </td>
+						<td>District of Columbia</td>
+						<td>154,937</td>
+						<td>382</td>
+						<td>0.25</td>
+					</tr>
+					<tr>
+						<td>55. </td>
+						<td>Hawaii</td>
+						<td>103,103</td>
+						<td>238</td>
+						<td>0.23</td>
+					</tr>
+					<tr>
+						<td>56. </td>
+						<td>Mississippi</td>
+						<td>135,432</td>
+						<td>276</td>
+						<td>0.2</td>
+					</tr>
+					<tr>
+						<td>57. </td>
+						<td>Louisiana</td>
+						<td>304,549</td>
+						<td>512</td>
+						<td>0.17</td>
+					</tr>
+					<tr>
+						<td>58. </td>
+						<td>Alaska</td>
+						<td>68,290</td>
+						<td>84</td>
+						<td>0.12</td>
+					</tr>
+					<tr>
+						<td>59. </td>
+						<td>Tennessee</td>
+						<td>405,075</td>
+						<td>201</td>
+						<td>0.05</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<script type="text/javascript">
+
+$.tablesorter.addWidget({
+    id: "numbering",
+    format: function(table) {
+        var c = table.config;
+        $("tr:visible", table.tBodies[0]).each(function(i) {
+            $(this).find('td').eq(0).text(i + 1);
+        });
+    }
+});
+
+$("table").tablesorter({
+    // prevent first column from being sortable
+    headers: {
+        0: { sorter: false }
+    },
+    // apply custom widget
+    widgets: ['numbering']
+});
+
+			</script>
+		</body>
+	</html>

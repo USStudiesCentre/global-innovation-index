@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Maps</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+    <script src="https://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+    <script type="text/javascript" src="d3-legend.js"></script>
+  
+    <script type='text/javascript' src='https://code.jquery.com/jquery.min.js'></script>
+    <style type="text/css">
+
+
+
+      body {
+        margin: 0;
+        font-family: 'Univers LT Pro', 'Neo Sans Pro', sans-serif;
+        font-weight: 400;
+        overflow:hidden;
+        display:flex;
+        flex-direction: column;
+      }
+
+
+
+        div.container{
+        display:flex;
+        margin:1 auto;
+        align-items: center;
+        justify-content: center;
+         width:100%;
+         height:100%;
+
+     
+    }
+    
+ 
+     div.container_left {
+      width:50%;
+      height:80%;
+      }
+
+      div.container_right {
+        width: 50%;
+        height:80%;
+      }
+
+      div.legend{
+       width:20%
+       height:80%;
+      }
+      svg {
+        background-color: white;
+        position:relative;
+      }
+
+
+    .states:hover{
+      opacity: .7;
+    }
+      
+      .d3-tip {
+        line-height: 1;
+        /*font-weight: bold;*/
+        padding: 8px;
+        max-width: 500px;
+        background: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        border-radius: 1px;
+      }
+
+      /* Creates a small triangle extender for the tooltip */
+      .d3-tip:after {
+        box-sizing: border-box;
+        display: inline;
+        font-size: 8px;
+        width: 100%;
+        line-height: 1;
+        color: rgba(0, 0, 0, 0.8);
+        content: "\25BC";
+        position: absolute;
+        text-align: center;
+      }
+
+      /* Style northward tooltips differently */
+      .d3-tip.n:after {
+        margin: -1px 0 0 0;
+        top: 100%;
+        left: 0;
+}
+
+
+
+.btns {
+    width:120px;
+    min-width: 120px;
+    height:40px;
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 2px 2px;
+    text-align: center;
+    font-size: 12px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.2s; /* Safari */
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+
+.btns5 {
+    background-color: white;
+    color: gray;
+    /*border: 2px solid #555555;*/
+}
+
+.btns5:hover {
+    background-color: #555555;
+    color: white;
+}
+
+
+    </style>
+  </head>
+  <body>
+    
+
+    <div class="container" id="header">
+      <h1>State by State Analysis of Innovation</h1>
+    </div>
+    <div class="container" >
+       <btns class="btns btns5" onclick="map_orig()">Education - Exam Results by State</btns>
+       <btns class="btns btns5" onclick="map_rd()">Business R&D Spending as % of Gross State Product</btns>
+       <btns class="btns btns5" onclick="map_exports()">Technology Exports by State</btns>
+    </div>
+      <div class="container">
+          <div class="container_left" id="us">
+          </div>
+          <div id="legend">
+          </div>
+          <div class="container_right" id="au">
+          </div>
+          
+    </div>
+    <script type="text/javascript">
+    
+        $('btns').click(function() {
+        this.style.fontWeight = 'bold'
+        $(this).siblings().css('font-weight', 'normal')
+    })
+
+
+//data 
+//exam results
+exam_au = {"New South Wales":57.67, 
+  "Victoria":61.33, 
+  "Queensland":57.67, 
+  "South Australia":58.33, 
+  "Western Australia":62.67, 
+  "Tasmania": 46.67, 
+  "Northern Territory": 48.67, 
+  "Australian Capital Territory":64.67, 
+  };
+
+exam_us = {"Massachusetts":47,
+  "New Hampshire":45.67,
+  "Minnesota":44.33,
+  "Vermont":43.33,
+  "Utah":42,
+  "New Jersey":40.67,
+  "Wisconsin":40,
+  "Montana":39,
+  "Nebraska":39,
+  "North Dakota":38.33,
+  "Connecticut":38,
+  "Virginia":38,
+  "Washington":38,
+  "Pennsylvania":37.5,
+  "Indiana":37.33,
+  "Idaho":37,
+  "Iowa":37,
+  "Maine":36.33,
+  "Ohio":36.33,
+  "Wyoming":36.33,
+  "Maryland":36,
+  "South Dakota":36,
+  "Missouri":35.67,
+  "Oregon":35.33,
+  "Kansas":34,
+  "Kentucky":33,
+  "Rhode Island":33,
+  "Tennessee":33,
+  "Colorado":32.5,
+  "Michigan":32.33,
+  "Texas":32.33,
+  "Illinois":31.67,
+  "Alaska":31.5,
+  "New York":31.33,
+  "North Carolina":31.33,
+  "Arizona":30.33,
+  "Delaware":30,
+  "Florida":29.67,
+  "Georgia":29.67,
+  "South Carolina":28.33,
+  "Arkansas":26.67,
+  "Nevada":26.67,
+  "Oklahoma":26.67,
+  "California":26.33,
+  "Hawaii":26.33,
+  "West Virginia":25,
+  "Alabama":21.33,
+  "Mississippi":20.67,
+  "New Mexico":20.67,
+  "Louisiana":20.5,
+  "District Of Columbia":14,
+};
+
+//r+d business expenditure by GSP
+rd_au = {"New South Wales":1.25, 
+  "Victoria":1.18, 
+  "Queensland":0.63, 
+  "South Australia":0.78, 
+  "Western Australia":0.83, 
+  "Tasmania": 0.72, 
+  "Northern Territory": 0.31, 
+  "Australian Capital Territory":0.26, 
+  };
+
+rd_us = {"Massachusetts":4.4,
+  "New Hampshire":2.6,
+  "Minnesota":2.09,
+  "Vermont":0.82,
+  "Utah":2.2,
+  "New Jersey":2.5,
+  "Wisconsin":1.55,
+  "Montana":0.49,
+  "Nebraska":0.51,
+  "North Dakota":0.38,
+  "Connecticut":3.33,
+  "Virginia":0.93,
+  "Washington":3.79,
+  "Pennsylvania":1.46,
+  "Indiana":1.88,
+  "Idaho":2.37,
+  "Iowa":1.44,
+  "Maine":0.52,
+  "Ohio":1.49,
+  "Wyoming":0.45,
+  "Maryland":1.4,
+  "South Dakota":0.3,
+  "Missouri":2.08,
+  "Oregon":2.94,
+  "Kansas":1.4,
+  "Kentucky":0.67,
+  "Rhode Island":1.35,
+  "Tennessee":0.05,
+  "Colorado":1.39,
+  "Michigan":3.64,
+  "Texas":1.08,
+  "Illinois":1.65,
+  "Alaska":0.12,
+  "New York":1.06,
+  "North Carolina":1.72,
+  "Arizona":1.89,
+  "Delaware":3.89,
+  "Florida":0.66,
+  "Georgia":0.92,
+  "South Carolina":0.64,
+  "Arkansas":0.25,
+  "Nevada":0.27,
+  "Oklahoma":0.35,
+  "California":4.33,
+  "Hawaii":0.23,
+  "West Virginia":0.27,
+  "Alabama":0.78,
+  "Mississippi":0.2,
+  "New Mexico":0.54,
+  "Louisiana":0.17,
+  "District Of Columbia":0.25,
+};
+
+//tech exports 
+exports_au = {"New South Wales":906, 
+  "Victoria":508, 
+  "Queensland":317, 
+  "South Australia":76, 
+  "Western Australia":159, 
+  "Tasmania": 7, 
+  "Northern Territory": 2, 
+  "Australian Capital Territory":9, 
+  };
+
+exports_us = {"Massachusetts":9357,
+  "New Hampshire":1459,
+  "Minnesota":4941,
+  "Vermont":3546,
+  "Utah":2611,
+  "New Jersey":4941,
+  "Wisconsin":3891,
+  "Montana":48,
+  "Nebraska":256,
+  "North Dakota":79,
+  "Connecticut":1804,
+  "Virginia":3020,
+  "Washington":3507,
+  "Pennsylvania":4851,
+  "Indiana":2304,
+  "Idaho":3661,
+  "Iowa":726,
+  "Maine":755,
+  "Ohio":4134,
+  "Wyoming":8,
+  "Maryland":2278,
+  "South Dakota":143,
+  "Missouri":777,
+  "Oregon":8205,
+  "Kansas":810,
+  "Kentucky":2125,
+  "Rhode Island":227,
+  "Tennessee":6016,
+  "Colorado":2650,
+  "Michigan":3315,
+  "Texas":57728,
+  "Illinois":8140,
+  "Alaska":9,
+  "New York":8486,
+  "North Carolina":3418,
+  "Arizona":6272,
+  "Delaware":764,
+  "Florida":18560,
+  "Georgia":2893,
+  "South Carolina":2163,
+  "Arkansas":253,
+  "Nevada":1817,
+  "Oklahoma":1075,
+  "California":57344,
+  "Hawaii":57,
+  "West Virginia":146,
+  "Alabama":9,
+  "Mississippi":1293,
+  "New Mexico":2138,
+  "Louisiana":371,
+  "District Of Columbia":471,
+};
+
+      //Width and height of svg
+      var w = 600;
+      var h = 600;
+      //Define map projection - Aus
+      var projection = d3.geo.mercator()
+                   .center([ 132, -28])
+                   .translate([w/2, h/2])
+                   .scale(700);
+
+      //Define map projection - US
+      var projection1 = d3.geo.albersUsa()
+                   .translate([w/2, h/2])
+                   .scale(700);
+
+      //Define path generator 
+      var path_aus = d3.geo.path()
+               .projection(projection);
+
+      var path_us = d3.geo.path()
+        .projection(projection1);
+
+
+
+      //Create SVG
+      var svg_aus = d3.select("#au")
+            .append("svg")
+            .attr("preserveAspectRatio", "xMidYMid")
+            .attr("viewBox", "0 0 " + w + " " + h);
+            //Create SVG
+      var svg_us = d3.select("#us")
+            .append("svg")
+            .attr("preserveAspectRatio", "xMidYMid")
+            .attr("viewBox", "0 0 " + w + " " + h);
+
+
+
+//tooltip
+    var us_exam_tip = d3.tip()
+        .attr('class', 'd3-tip')
+        .offset([-5, 0])
+        .html(function(d) {
+          return "State: "+ d.properties["name"] + "<br>" + "Average exam result: " + exam_us[(d.properties["name"])]+"%";
+        });
+
+   var aus_exam_tip = d3.tip()
+        .attr('class', 'd3-tip')
+        .offset([-5, 0])
+        .html(function(d) {
+          return "State: "+ d.properties["STATE_NAME"] +"<br>" + "Average exam result: " + exam_au[(d.properties["STATE_NAME"])]+"%";
+        });
+
+    var us_rd_tip = d3.tip()
+        .attr('class', 'd3-tip')
+        .offset([-5, 0])
+        .html(function(d) {
+          return "State: "+ d.properties["name"] + "<br>" + "Businesss R&D Spending as % of GSP: " + rd_us[(d.properties["name"])]+"%";
+        });
+
+   var aus_rd_tip = d3.tip()
+        .attr('class', 'd3-tip')
+        .offset([-5, 0])
+        .html(function(d) {
+          return "State: "+ d.properties["STATE_NAME"] +"<br>" + "Businesss R&D Spending as % of GSP: " + rd_au[(d.properties["STATE_NAME"])]+"%";
+        });
+
+    var us_exports_tip = d3.tip()
+        .attr('class', 'd3-tip')
+        .offset([-5, 0])
+        .html(function(d) {
+          return "State: "+ d.properties["name"] +"<br>" + "Tech exports: " + "$"+ exports_us[(d.properties["name"])]+ "m. AUD";
+        });
+
+   var aus_exports_tip = d3.tip()
+        .attr('class', 'd3-tip')
+        .offset([-5, 0])
+        .html(function(d) {
+          return "State: "+ d.properties["STATE_NAME"] +"<br>" + "Tech exports: " + "$" + exports_au[(d.properties["STATE_NAME"])]+ "m. AUD";
+        });
+svg_aus.call(aus_exam_tip);
+svg_us.call(us_exam_tip);
+svg_us.call(us_rd_tip);
+svg_aus.call(aus_rd_tip);
+svg_us.call(us_exports_tip);
+svg_aus.call(aus_exports_tip);
+//fill for exam map 
+var fill_exam= d3.scale.quantize()
+    .domain([20,30,40,50,60,70])
+    .range(['#fee5d9','#fcae91','#fb6a4a','#de2d26','#a50f15']);
+
+//first map to show:
+
+ //Load in GeoJSON data
+      d3.json("https://raw.githubusercontent.com/simaQ/maps-data/master/Australia-states.geo.json", function(json) {
+        svg_aus.selectAll("path_aus")
+           .data(json.features)
+           .enter()
+           .append("path")
+           .attr("d", path_aus)
+           .attr('class', 'states')
+            .on('mouseover', aus_exam_tip.show)
+            .on('mouseout', aus_exam_tip.hide)
+           .attr("stroke", "white")
+           .attr("d", path_aus)
+           .attr("fill", function(d) {
+         return fill_exam(exam_au[(d.properties["STATE_NAME"])]);
+       })
+         });
+    
+
+
+
+// Load GeoJSON data and merge with states data
+        d3.json("https://raw.githubusercontent.com/alignedleft/d3-book/master/chapter_14/us-states.json", function(json) {
+          svg_us.selectAll("path_us")
+            .data(json.features)
+            .enter()
+            .append("path")
+            .attr("d", path_us)
+            .attr('class', 'states')
+            .style("stroke", "#fff")
+            .on('mouseover', us_exam_tip.show)
+            .on('mouseout', us_exam_tip.hide)
+            .style("stroke-width", "1")
+            .attr("d", path_us)
+            .attr("fill", function(d) {
+           return fill_exam(exam_us[(d.properties["name"])]);
+         })
+           });
+
+    
+//legend
+
+svg_aus.append("g")
+  .attr("class", "legendLinear")
+  .attr("transform", "translate(20,20)");
+
+var legendLinear_edu = d3.legend.color()
+  .shapeWidth(20)
+  .cells([5])
+  .orient('vertical')
+  .scale(fill_exam)
+  .title("Average exam results (%).");
+
+svg_aus.select(".legendLinear")
+  .call(legendLinear_edu);
+
+function map_orig() {
+
+
+       svg_aus.selectAll("*").remove();
+
+       svg_us.selectAll("*").remove();
+
+     d3.json("https://raw.githubusercontent.com/simaQ/maps-data/master/Australia-states.geo.json", function(json) {
+        svg_aus.selectAll("path_aus")
+           .data(json.features)
+           .enter()
+           .append("path")
+           .attr("d", path_aus)
+           .attr('class', 'states')
+            .on('mouseover', aus_exam_tip.show)
+            .on('mouseout', aus_exam_tip.hide)
+           .attr("stroke", "white")
+           .attr("d", path_aus)
+           .attr("fill", function(d) {
+         return fill_exam(exam_au[(d.properties["STATE_NAME"])]);
+       })
+         });
+    
+
+
+
+// Load GeoJSON data and merge with states data
+        d3.json("https://raw.githubusercontent.com/alignedleft/d3-book/master/chapter_14/us-states.json", function(json) {
+          svg_us.selectAll("path_us")
+            .data(json.features)
+            .enter()
+            .append("path")
+            .attr("d", path_us)
+            .attr('class', 'states')
+            .style("stroke", "#fff")
+            .on('mouseover', us_exam_tip.show)
+            .on('mouseout', us_exam_tip.hide)
+            .style("stroke-width", "1")
+            .attr("d", path_us)
+            .attr("fill", function(d) {
+           return fill_exam(exam_us[(d.properties["name"])]);
+         })
+           });
+
+    
+// //legend
+
+svg_aus.append("g")
+  .attr("class", "legendLinear")
+  .attr("transform", "translate(20,20)");
+
+var legendLinear_edu = d3.legend.color()
+  .shapeWidth(20)
+  .cells([5])
+  .orient('vertical')
+  .scale(fill_exam)
+  .title("Average exam results (%).");
+
+svg_aus.select(".legendLinear")
+  .call(legendLinear_edu);
+};          
+//third map to show:
+
+
+ //Load in GeoJSON data
+ 
+function map_rd()  {
+
+
+       svg_aus.selectAll("*").remove();
+
+       svg_us.selectAll("*").remove();
+
+      d3.json("https://raw.githubusercontent.com/simaQ/maps-data/master/Australia-states.geo.json", function(json) {
+        svg_aus.selectAll("path_aus")
+           .data(json.features)
+           .enter()
+           .append("path")
+           .attr("d", path_aus)
+           .attr('class', 'states')
+            .on('mouseover', aus_rd_tip.show)
+            .on('mouseout', aus_rd_tip.hide)
+           .attr("stroke", "white")
+           .attr("d", path_aus)
+           .attr("fill", function(d) {
+         return linear(rd_au[(d.properties["STATE_NAME"])]);
+       })
+         });
+    
+
+
+
+// Load GeoJSON data and merge with states data
+        d3.json("https://raw.githubusercontent.com/alignedleft/d3-book/master/chapter_14/us-states.json", function(json) {
+          svg_us.selectAll("path_us")
+            .data(json.features)
+            .enter()
+            .append("path")
+            .attr("d", path_us)
+            .attr('class', 'states')
+            .style("stroke", "#fff")
+            .on('mouseover', us_rd_tip.show)
+            .on('mouseout', us_rd_tip.hide)
+            .style("stroke-width", "1")
+            .attr("d", path_us)
+            .attr("fill", function(d) {
+         return linear(rd_us[(d.properties["name"])]);
+       })
+           });
+
+var linear = d3.scale.threshold()
+  .domain([0.5,1,1.5,2,2.5,3,3.5,4,4.5])
+  .range(['#bdbdbd','#ece7f2','#d0d1e6','#a6bddb','#74a9cf','#3690c0','#0570b0','#045a8d','#023858']);
+
+svg_aus.append("g")
+  .attr("class", "legendLinear")
+  .attr("transform", "translate(20,20)");
+
+var legendLinear = d3.legend.color()
+  .shapeWidth(10)
+  .cells([0,0.5])
+  .orient('vertical')
+  .scale(linear)
+  .title("Percent of GSP:");
+
+svg_aus.select(".legendLinear")
+  .call(legendLinear);
+          
+ };
+          
+
+//third map to show:
+
+
+ //Load in GeoJSON data
+ 
+function map_exports()  {
+
+
+       svg_aus.selectAll("*").remove();
+
+       svg_us.selectAll("*").remove();
+       
+
+      d3.json("https://raw.githubusercontent.com/simaQ/maps-data/master/Australia-states.geo.json", function(json) {
+        svg_aus.selectAll("path_aus")
+           .data(json.features)
+           .enter()
+           .append("path")
+           .attr("d", path_aus)
+           .attr('class', 'states')
+            .on('mouseover', aus_exports_tip.show)
+            .on('mouseout', aus_exports_tip.hide)
+           .attr("stroke", "white")
+           .attr("d", path_aus)
+           .attr("fill", function(d) {
+         return linear_exports(exports_au[(d.properties["STATE_NAME"])]);
+       })
+         });
+    
+
+
+
+// Load GeoJSON data and merge with states data
+        d3.json("https://raw.githubusercontent.com/alignedleft/d3-book/master/chapter_14/us-states.json", function(json) {
+          svg_us.selectAll("path_us")
+            .data(json.features)
+            .enter()
+            .append("path")
+            .attr("d", path_us)
+            .attr('class', 'states')
+            .style("stroke", "#fff")
+            .on('mouseover', us_exports_tip.show)
+            .on('mouseout', us_exports_tip.hide)
+            .style("stroke-width", "1")
+            .attr("d", path_us)
+            .attr("fill", function(d) {
+         return linear_exports(exports_us[(d.properties["name"])]);
+       })
+           });
+
+var linear_exports = d3.scale.threshold()
+  .domain([10,100,1000,10000])
+  .range(['#ffffb2','#fecc5c','#fd8d3c','#f03b20','#bd0026']);
+
+
+svg_aus.append("g")
+  .attr("class", "legendLinear")
+  .attr("transform", "translate(20,20)");
+
+var legend_exports = d3.legend.color()
+  .shapeWidth(10)
+  .cells([10,100,1000,10000])
+  .orient('vertical')
+  .scale(linear_exports)
+  .title("Tech exports in AUD millions");
+
+
+svg_aus.select(".legendLinear")
+  .call(legend_exports);
+          
+ };
+          
+</script>
+</body>
+</html>

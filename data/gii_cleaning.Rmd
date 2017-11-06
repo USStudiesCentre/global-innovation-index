@@ -1,0 +1,22 @@
+---
+title: "gii-scores-long"
+author: "Zoe Meers"
+date: "12 September 2017"
+output: html_document
+---
+```{r}
+library(readr)
+library(tidyverse)
+gii_scores_17 <- read_csv("~/GII/D3/gii.scores_17.csv")
+View(gii_scores_17)
+```
+
+```{r}
+gii_scores_17[4] <- NULL
+```
+
+```{r}
+gii <- gii_scores_17 %>%
+  gather(country, scores, -indicators)
+```
+

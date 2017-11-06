@@ -1,0 +1,123 @@
+<html>
+  	<head>
+		<meta charset='UTF-8'>
+			<title>List of Tables</title>
+			<script type="text/javascript" src="jquery-3.2.1.min.js"></script> 
+			<script type="text/javascript" src="jquery.tablesorter.js"></script> 
+      <link href='https://fonts.googleapis.com/css?family=Titillium Web' rel='stylesheet'>
+			<style type="text/css">
+
+			body {
+			  /* font-family: "Helvetica Neue"; */
+			  font-family: 'Titillium', sans-serif;
+			  font-size: 14px;
+			  text-rendering: optimizeLegibility;
+			}
+
+			th.headerSortUp { 
+			    background-image: url(metro_black-asc.png); 
+			    background-color: black; 
+			} 
+			th.headerSortDown { 
+			    background-image: url(metro_black-desc.png); 
+			    background-color: black; 
+			} 
+						 p {
+        border: none
+        resize:horizontal;
+        display:flex;
+    }
+
+    label {
+        display: inline-block;
+    }
+
+    a:link {
+        color: gray;
+        background-color: transparent;
+        text-decoration: none;
+    }
+
+    a:visited {
+        color: gray;
+        background-color: transparent;
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: blue;
+        background-color: transparent;
+        text-decoration: underline;
+    }
+
+    a:active {
+        color: gray;
+        background-color: transparent;
+        text-decoration: underline;
+    }
+			/* CSS needed for this widget */
+.ts-align-wrap {
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+}
+.ts-align-wrap, .ts-align-left, .ts-align-right {
+  display: inline-block;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.ts-align-left {
+  text-align:right;
+}
+.ts-align-right {
+  text-align:left;
+}
+/* optional - colorize alignment character in Animals column */
+td:nth-child(3) .ts-align-right i {
+  color: red;
+}
+.select-style {
+    border: 1px solid #ccc;
+    width: 120px;
+    border-radius: 3px;
+    overflow: hidden;
+    background: #fafafa url("img/icon-select.png") no-repeat 90% 50%;
+}
+
+.select-style select {
+    padding: 5px 8px;
+    width: 130%;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+}
+
+.select-style select:focus {
+    outline: none;
+}
+
+</style>
+		</head>
+	<body>
+ <center> <select id="selector">
+    <option>Select Table</option>
+    <option value="https://run.plnkr.co/plunks/mAdSenImBN9eovXHUf7q/">Business R&D Spending</option>
+    <option value="https://run.plnkr.co/plunks/pUl2R8z7aoy3WSifkdAx/">Exam Results</option>
+    <option value="https://run.plnkr.co/plunks/kAdVzko7FSdPeEOiWt1r/">High Tech Exports</option>
+</select></center>
+<div>
+   <center> <iframe src="about:blank" frameborder="0" id="iframeId" height="1400px" width="70%"></iframe></center>
+</div>
+</html>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#selector").change(function(){
+        $("#iframeId").attr("src", $(this).val());
+    });
+});
+</script>
+</body>
+</html>

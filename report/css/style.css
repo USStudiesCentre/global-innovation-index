@@ -1,0 +1,387 @@
+
+body {
+        font-family: 'Neosans','Univers LT Pro', sans-serif;
+        color:black;
+        font-size: 18px;
+        text-align:justify;
+        text-rendering: optimizeLegibility;
+        max-height:100vh;
+        overflow-x:hidden;
+        resize: both;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: antialiased;
+        height:100%;
+        margin: 0 auto;
+        width:90%;
+          background-color: offwhite;
+           -webkit-align-items: center;
+         align-items: center;
+         -webkit-justify-content: center;
+         justify-content: center;
+          
+}
+
+ h1,h2,h3 {
+   
+   font-family: "Neo Sans Pro";
+   color:black
+ }
+
+p{
+  font-family: "Univers LT Pro"
+}
+
+ #intro{ /*height: 100%;
+        padding-left:20%;
+        padding-right:20%;
+        width: 60%;
+        border: none;
+        text-align: justify;
+        position:relative;*/
+
+          max-width:50rem;
+          margin:0 auto
+    }
+
+div {
+    position:relative;
+    margin: 0 auto;
+}
+  #writing{
+        /*height: 100%;
+        width: 60%;
+        overflow:hidden;
+        border: none;
+        padding-left:20%;
+        padding-right:20%;
+        color:grey;
+        text-align:justify;
+        position:relative;*/
+
+          max-width:50rem;
+          margin:0 auto
+    }
+
+    #footer{
+        margin-top:5%;
+        height:30vh;
+        width:100%;
+        text-align: center;
+        position:relative;
+    }
+
+
+#menuToggle
+{
+  display: block;
+  position: relative;
+  top: 50px;
+  left: 10px;
+  
+  z-index: 1;
+  
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#menuToggle input
+{
+  display: block;
+  width: 40px;
+  height: 32px;
+  position: absolute;
+  top: -7px;
+  left: -5px;
+  
+  cursor: pointer;
+  
+  opacity: 0; /* hide this */
+  z-index: 2; /* and place it over the hamburger */
+  
+  -webkit-touch-callout: none;
+}
+
+/*
+ * Just a quick hamburger
+ */
+#menuToggle span
+{
+  display: block;
+  width: 33px;
+  height: 4px;
+  margin-bottom: 5px;
+  position: relative;
+  
+  background: red;
+  border-radius: 3px;
+  
+  z-index: 1;
+  
+  transform-origin: 4px 0px;
+  
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              opacity 0.55s ease;
+}
+
+#menuToggle span:first-child
+{
+  transform-origin: 0% 0%;
+}
+
+#menuToggle span:nth-last-child(2)
+{
+  transform-origin: 0% 100%;
+}
+
+/* 
+ * Transform all the slices of hamburger
+ * into a crossmark.
+ */
+#menuToggle input:checked ~ span
+{
+  opacity: 1;
+  transform: rotate(45deg) translate(-2px, -1px);
+  background: #232323;
+}
+
+/*
+ * But let's hide the middle one.
+ */
+#menuToggle input:checked ~ span:nth-last-child(3)
+{
+  opacity: 0;
+  transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+/*
+ * Ohyeah and the last one should go the other direction
+ */
+#menuToggle input:checked ~ span:nth-last-child(2)
+{
+  transform: rotate(-45deg) translate(0, -1px);
+}
+
+/*
+ * Make this absolute positioned
+ * at the top left of the screen
+ */
+#menu
+{
+  position: absolute;
+  width: 300px;
+  margin: -100px 0 0 -50px;
+  padding: 50px;
+  padding-top: 125px;
+  
+  background: #ededed;
+  list-style-type: none;
+  -webkit-font-smoothing: antialiased;
+  /* to stop flickering of text in safari */
+  
+  transform-origin: 0% 0%;
+  transform: translate(-100%, 0);
+  
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+
+#menu li
+{
+  padding: 10px 0;
+  font-size: 18px;
+}
+
+/*
+ * And let's slide it in from the left
+ */
+#menuToggle input:checked ~ ul
+{
+  transform: none;
+}
+    /* Main content */
+.main {
+    margin-top: 30px; /* Add a top margin to avoid content overlay */
+}
+
+    iframe {
+            width: 80vw;
+            /*height: 70vh;*/
+            max-width:100rem;
+            overflow:hidden;
+            margin: 0 auto;
+            display:flex;
+            border: none;
+/* The navigation bar */
+
+}
+    #title {
+        height: 70vh;
+        text-align: center;
+        width: 80%;
+        margin-left:10%;
+        margin-right:10%;
+        background-image: url("background.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        position:relative;
+
+    }
+
+    p{
+        width: 15em;
+        border: none
+    }
+
+
+    a:link {
+        color: red;
+        background-color: transparent;
+        text-decoration: underline;
+    }
+
+    a:visited {
+        color: red;
+        background-color: transparent;
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: red;
+        background-color: transparent;
+        text-decoration: underline;
+    }
+
+    a:active {
+        color: red;
+        background-color: transparent;
+        text-decoration: underline;
+    }
+
+p.piecemeal {
+  opacity:1;
+  padding:1rem;
+  color: rgba(0, 0, 0, 0.8);
+  text-align:justify;
+  font-size:18px;
+  -webkit-flex: 1 0 0;
+  flex: 1 0 0;
+}
+
+/* This seems to be needed otherwise margins overlap the bottom */
+p.clear {
+  height: 1px;
+}
+
+div#sticky {
+  font-size: 1.1rem;
+  padding-top: 0;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 10px; /* Seems to fix single pixel line on mobile */
+  z-index: -1;
+  /*width:50vw;
+  margin-left:10vw;
+  height: 50vh;*/
+  -webkit-flex: 2 0 0;
+   flex: 2 0 0;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+/*iphone vertical*/
+media only screen and (max-width:340px) {
+body{
+    font-size:1.1rem;
+    flex:column;
+    margin: 0 auto;
+}
+#sticky{
+  margin: 20px;
+  order:0;
+  
+
+}
+#chart{
+ margin: 0 auto;
+}
+}
+
+}
+/*iphone horizontal*/
+media only screen and (max-width:640px) {
+body{
+    font-size:1.1rem;
+    flex:column;
+    margin:0 auto;
+}
+#sticky{
+  margin: 20px;
+  order:0;
+  
+
+}
+#chart{
+ margin: 0 auto;
+}
+}
+
+}
+/*tablet vertical*/
+media only screen and (max-width:768px) {
+body{
+    font-size:1.1rem;
+    flex:column;
+    margin:0 auto;
+}
+#sticky{
+  margin:20px;
+  order:0;
+  
+
+}
+#chart{
+ margin: 0 auto;
+}
+}
+
+}
+/*tablet horizontal*/
+media only screen and (max-width:1010px) {
+body{
+    font-size:1.1rem;
+    flex:column;
+    margin:0 auto;
+}
+#sticky{
+margin:20px;
+  order:0;
+  
+
+}
+#chart{
+ margin: 0 auto;
+}
+}
+
+}
+/*desktop*/
+media only screen and (min-width:1240px) {
+body{
+    font-size:1.1rem;
+    flex:column;
+    margin: 0 auto;
+}
+#sticky{
+  margin: 20px;
+  order:0;
+  
+
+}
+#chart{
+ margin: 0 auto;
+}
+}
+
+}
