@@ -34,6 +34,9 @@
      
     }
     
+    h1{
+      font-family:'Neo Sans Pro';
+    }
  
      div.container_left {
       width:50%;
@@ -109,12 +112,15 @@
 
 .btns5 {
     background-color: white;
-    color: gray;
-    /*border: 2px solid #555555;*/
+    text-align:center;
+    float:center;
+    color:  gray;
+    border-radius: 10px;
+    border: 1.5px solid gray;
 }
 
 .btns5:hover {
-    background-color: #555555;
+    background-color: gray;
     color: white;
 }
 
@@ -124,11 +130,11 @@
   <body>
     
 
-    <div class="container" id="header">
-      <h1>State by State Analysis of Innovation</h1>
-    </div>
+    <!--<div class="container" id="header">-->
+    <!--  <h1>Australia and US State by State Analysis of Selected Innovation Indicators</h1>-->
+    <!--</div>-->
     <div class="container" >
-       <btns class="btns btns5" onclick="map_orig()">Education - Exam Results by State</btns>
+       <btns class="btns btns5" id="orig" onclick="map_orig()">Education - Exam Results by State</btns>
        <btns class="btns btns5" onclick="map_rd()">Business R&D Spending as % of Gross State Product</btns>
        <btns class="btns btns5" onclick="map_exports()">Technology Exports by State</btns>
     </div>
@@ -143,9 +149,17 @@
     </div>
     <script type="text/javascript">
     
+        
+    jQuery(function(){
+   jQuery('#orig').click();
+});
         $('btns').click(function() {
         this.style.fontWeight = 'bold'
+        this.style.color='white'
+        this.style.backgroundColor='gray'
         $(this).siblings().css('font-weight', 'normal')
+        $(this).siblings().css('color', 'gray')
+        $(this).siblings().css('background-color', 'white')
     })
 
 
@@ -189,7 +203,7 @@ exam_us = {"Massachusetts":47,
   "Kentucky":33,
   "Rhode Island":33,
   "Tennessee":33,
-  "Colorado":32.5,
+  "Colorado":36,
   "Michigan":32.33,
   "Texas":32.33,
   "Illinois":31.67,
@@ -211,135 +225,135 @@ exam_us = {"Massachusetts":47,
   "Mississippi":20.67,
   "New Mexico":20.67,
   "Louisiana":20.5,
-  "District Of Columbia":14,
+  "District Of Columbia":19,
 };
 
 //r+d business expenditure by GSP
-rd_au = {"New South Wales":1.25, 
-  "Victoria":1.18, 
-  "Queensland":0.63, 
-  "South Australia":0.78, 
-  "Western Australia":0.83, 
-  "Tasmania": 0.72, 
-  "Northern Territory": 0.31, 
-  "Australian Capital Territory":0.26, 
+rd_au = {"Tasmania":0.70,
+"Queensland":0.62,
+"Western Australia":0.87,
+"South Australia":0.77,
+"New South Wales":1.19,
+"Victoria":1.14,
+"Australian Capital Territory":0.25,
+"Northern Territory":0.31,
   };
 
-rd_us = {"Massachusetts":4.4,
-  "New Hampshire":2.6,
-  "Minnesota":2.09,
-  "Vermont":0.82,
-  "Utah":2.2,
-  "New Jersey":2.5,
-  "Wisconsin":1.55,
-  "Montana":0.49,
-  "Nebraska":0.51,
-  "North Dakota":0.38,
-  "Connecticut":3.33,
-  "Virginia":0.93,
-  "Washington":3.79,
-  "Pennsylvania":1.46,
-  "Indiana":1.88,
-  "Idaho":2.37,
-  "Iowa":1.44,
-  "Maine":0.52,
-  "Ohio":1.49,
-  "Wyoming":0.45,
-  "Maryland":1.4,
-  "South Dakota":0.3,
-  "Missouri":2.08,
-  "Oregon":2.94,
-  "Kansas":1.4,
-  "Kentucky":0.67,
-  "Rhode Island":1.35,
-  "Tennessee":0.05,
-  "Colorado":1.39,
-  "Michigan":3.64,
-  "Texas":1.08,
-  "Illinois":1.65,
-  "Alaska":0.12,
-  "New York":1.06,
-  "North Carolina":1.72,
-  "Arizona":1.89,
-  "Delaware":3.89,
-  "Florida":0.66,
-  "Georgia":0.92,
-  "South Carolina":0.64,
-  "Arkansas":0.25,
-  "Nevada":0.27,
-  "Oklahoma":0.35,
-  "California":4.33,
-  "Hawaii":0.23,
-  "West Virginia":0.27,
-  "Alabama":0.78,
-  "Mississippi":0.2,
-  "New Mexico":0.54,
-  "Louisiana":0.17,
-  "District Of Columbia":0.25,
+rd_us = {"California": 3.81,
+"Massachusetts":3.68,
+"Washington":3.62,
+"Michigan":3.29,
+"Delaware":2.99,
+"Oregon":2.79,
+"Connecticut":2.47,
+"New Jersey":2.01,
+"Idaho":1.97,
+"Minnesota":1.87,
+"Utah":1.79,
+"Indiana":1.57,
+"Arizona":1.51,
+"Illinois":1.46,
+"Pennsylvania":1.30,
+"Wisconsin":1.30,
+"Missouri":1.26,
+"North Carolina":1.26,
+"Rhode Island":1.17,
+"Colorado":1.15,
+"Iowa":1.10,
+"New Hampshire":1.10,
+"Kansas":1.02,
+"Ohio":1.00,
+"Texas":0.94,
+"New York":0.81,
+"Maryland":0.77,
+"Georgia":0.76,
+"Vermont":0.66,
+"South Carolina":0.56,
+"Virginia":0.56,
+"Nebraska":0.47,
+"Maine":0.45,
+"Montana":0.43,
+"Alabama":0.42,
+"Florida":0.42,
+"Tennessee":0.42,
+"Kentucky":0.39,
+"Wyoming":0.36,
+"North Dakota":0.35,
+"Oklahoma":0.34,
+"New Mexico":0.28,
+"South Dakota":0.24,
+"Nevada":0.23,
+"Arkansas":0.22,
+"West Virginia":0.22,
+"Mississippi":0.17,
+"Hawaii":0.15,
+"Louisiana":0.13,
+"Alaska":0.06,
 };
 
 //tech exports 
-exports_au = {"New South Wales":906, 
-  "Victoria":508, 
-  "Queensland":317, 
-  "South Australia":76, 
-  "Western Australia":159, 
-  "Tasmania": 7, 
-  "Northern Territory": 2, 
-  "Australian Capital Territory":9, 
+exports_au = {"New South Wales":1542, 
+  "Victoria":1045, 
+  "Queensland":189, 
+  "South Australia":0, 
+  "Western Australia":591, 
+  "Tasmania": 0, 
+  "Northern Territory": 84, 
+  "Australian Capital Territory":0, 
   };
 
-exports_us = {"Massachusetts":9357,
-  "New Hampshire":1459,
-  "Minnesota":4941,
-  "Vermont":3546,
-  "Utah":2611,
-  "New Jersey":4941,
-  "Wisconsin":3891,
-  "Montana":48,
-  "Nebraska":256,
-  "North Dakota":79,
-  "Connecticut":1804,
-  "Virginia":3020,
-  "Washington":3507,
-  "Pennsylvania":4851,
-  "Indiana":2304,
-  "Idaho":3661,
-  "Iowa":726,
-  "Maine":755,
-  "Ohio":4134,
-  "Wyoming":8,
-  "Maryland":2278,
-  "South Dakota":143,
-  "Missouri":777,
-  "Oregon":8205,
-  "Kansas":810,
-  "Kentucky":2125,
-  "Rhode Island":227,
-  "Tennessee":6016,
-  "Colorado":2650,
-  "Michigan":3315,
-  "Texas":57728,
-  "Illinois":8140,
-  "Alaska":9,
-  "New York":8486,
-  "North Carolina":3418,
-  "Arizona":6272,
-  "Delaware":764,
-  "Florida":18560,
-  "Georgia":2893,
-  "South Carolina":2163,
-  "Arkansas":253,
-  "Nevada":1817,
-  "Oklahoma":1075,
-  "California":57344,
-  "Hawaii":57,
-  "West Virginia":146,
-  "Alabama":9,
-  "Mississippi":1293,
-  "New Mexico":2138,
-  "Louisiana":371,
-  "District Of Columbia":471,
+exports_us = {
+"Alabama":2182.62,
+"Alaska":38.06,
+"Arizona":8875.24,
+"Arkansas":1934.10,
+"California":33144.76,
+"Colorado":1118.11,
+"Connecticut":9017.99,
+"Delaware":2088.25,
+"District of Columbia":1467.62,
+"Florida":16964.90,
+"Georgia":11874.98,
+"Hawaii":355.63,
+"Idaho":2301.28,
+"Illinois":8644.60,
+"Indiana":10381.70,
+"Iowa":490.57,
+"Kansas":3148.87,
+"Kentucky":15403.22,
+"Louisiana":596.39,
+"Maine":548.11,
+"Maryland":2644.60,
+"Massachusetts":6528.82,
+"Michigan":2151.79,
+"Minnesota":4269.67,
+"Mississippi":1585.96,
+"Missouri":2926.36,
+"Montana":310.00,
+"Nebraska":718.74,
+"Nevada":716.25,
+"New Hampshire":2050.07,
+"New Jersey":4784.22,
+"New Mexico":1781.34,
+"New York":4838.08,
+"North Carolina":7029.53,
+"North Dakota":0.00,
+"Ohio":7313.08,
+"Oklahoma":1113.01,
+"Oregon":2302.49,
+"Pennsylvania":6283.97,
+"Rhode Island":31.28,
+"South Carolina":8935.77,
+"South Dakota":0.00,
+"Tennessee":8868.21,
+"Texas":35978.09,
+"Utah":1272.51,
+"Vermont":367.28,
+"Virginia":1780.03,
+"Washington":64442.15,
+"West Virginia":516.42,
+"Wisconsin":3013.87,
+"Wyoming":5.95,
 };
 
       //Width and height of svg
@@ -483,7 +497,7 @@ var legendLinear_edu = d3.legend.color()
   .cells([5])
   .orient('vertical')
   .scale(fill_exam)
-  .title("Average exam results (%).");
+  .title("Average exam results (%):");
 
 svg_aus.select(".legendLinear")
   .call(legendLinear_edu);
@@ -544,7 +558,7 @@ var legendLinear_edu = d3.legend.color()
   .cells([5])
   .orient('vertical')
   .scale(fill_exam)
-  .title("Average exam results (%).");
+  .title("Average exam results (%):");
 
 svg_aus.select(".legendLinear")
   .call(legendLinear_edu);
@@ -598,17 +612,17 @@ function map_rd()  {
        })
            });
 
-var linear = d3.scale.threshold()
-  .domain([0.5,1,1.5,2,2.5,3,3.5,4,4.5])
-  .range(['#bdbdbd','#ece7f2','#d0d1e6','#a6bddb','#74a9cf','#3690c0','#0570b0','#045a8d','#023858']);
+var linear = d3.scale.quantize()
+  .domain([0,0.5,1,1.5,2,2.5,3,3.5,4])
+  .range(['#bdbdbd','#ece7f2','#d0d1e6','#a6bddb','#74a9cf','#3690c0','#0570b0','#045a8d']);
 
 svg_aus.append("g")
   .attr("class", "legendLinear")
   .attr("transform", "translate(20,20)");
 
 var legendLinear = d3.legend.color()
-  .shapeWidth(10)
-  .cells([0,0.5])
+  .shapeWidth(20)
+  .cells([9])
   .orient('vertical')
   .scale(linear)
   .title("Percent of GSP:");
@@ -670,8 +684,8 @@ function map_exports()  {
            });
 
 var linear_exports = d3.scale.threshold()
-  .domain([10,100,1000,10000])
-  .range(['#ffffb2','#fecc5c','#fd8d3c','#f03b20','#bd0026']);
+  .domain([10,100,1000,10000,70000])
+  .range(["#ffeda0",'#feb24c','#fd8d3c','#fc4e2a','#bd0026']);
 
 
 svg_aus.append("g")
@@ -679,11 +693,11 @@ svg_aus.append("g")
   .attr("transform", "translate(20,20)");
 
 var legend_exports = d3.legend.color()
-  .shapeWidth(10)
-  .cells([10,100,1000,10000])
+  .shapeWidth(20)
   .orient('vertical')
   .scale(linear_exports)
-  .title("Tech exports in AUD millions");
+  .labels(["<10 million", "10-99 m.", "100m. - 999m.", "1 billion. - 9b.", "≥10 b."])
+  .title("Tech exports ($AUD):");
 
 
 svg_aus.select(".legendLinear")
